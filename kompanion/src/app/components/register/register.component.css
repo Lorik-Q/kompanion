@@ -1,0 +1,177 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0499ae;
+  padding: 1rem;
+  overflow: hidden;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.auth-card {
+  background: white;
+  padding: 2rem 5rem;
+  border-radius: 2rem;
+  width: 90%;
+  max-width: 900px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+}
+
+.logo {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-image {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.welcome-text {
+  color: #333;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  padding: 0 1.5rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: transparent;
+  border: 1px solid #0499ae;
+  border-radius: 2rem;
+  color: #000;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: #00a19c;
+  color: white;
+}
+
+.auth-link-text {
+  margin-top: 1rem;
+  color: #4a5568;
+  font-size: 1rem;
+}
+
+.auth-link {
+  color: #e53e3e;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  color: #c53030;
+  text-decoration: underline;
+}
+
+.error-message {
+  background: #fff5f5;
+  color: #c53030;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-align: center;
+  border: 2px solid #fed7d7;
+}
+
+/* Dynamische styling voor kleinere schermen */
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 1.5rem 2rem;
+  }
+
+  .welcome-text {
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+
+  .form-input,
+  .auth-button {
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+
+  .logo-image {
+    width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1rem 1.5rem;
+  }
+
+  .welcome-text {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .form-input,
+  .auth-button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .logo-image {
+    width: 100px;
+  }
+
+  .auth-link-text {
+    font-size: 0.9rem;
+  }
+}

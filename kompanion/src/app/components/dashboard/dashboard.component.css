@@ -1,0 +1,297 @@
+/* Algemene styling */
+body {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333; /* Neutrale kleur voor tekst */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.confirm-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.confirm-button:hover {
+  background-color: #d32f2f;
+}
+
+.cancel-button {
+  background-color: #9e9e9e;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: #757575;
+}
+
+.dashboard-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.content-layout {
+  background: white;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  display: flex;
+  gap: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar styling */
+
+.delete-button {
+  position: absolute; /* Voor positionering in de hoek */
+  top: 10px; /* Afstand van de bovenkant */
+  right: 10px; /* Afstand van de rechterkant */
+  border: none;
+  background-color: #f44336;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+.delete-button img {
+  width: 16px;
+  height: 16px;
+}
+
+.friends-sidebar {
+  flex: 1;
+  max-width: 250px;
+  min-width: 200px;
+  background: white;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 500px; /* Scrollbaar indien vriendenlijst te groot */
+  position: relative;
+}
+
+/* "Mijn vrienden" blijft vast */
+.friends-sidebar h2 {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding: 10px 0;
+  margin: 0;
+  text-align: center;
+  z-index: 10;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 2px solid #e0e0e0; /* Onderaan een subtiele lijn */
+}
+
+/* Vriendenlijst styling */
+.friend-list {
+  margin-top: 10px;
+}
+
+.friend-card {
+  background: #edf5e8;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Nodig om de knop te positioneren */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.friend-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.friend-name {
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.video-call-button {
+  margin-top: 10px;
+  border: none;
+  background-color: #4caf50;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.video-call-button:hover {
+  background-color: #388e3c;
+}
+
+.video-call-button img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Main content styling */
+.main-content {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  background: white;
+  border-radius: 20px;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.action-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  padding: 10px 0;
+}
+
+.action-tile {
+  position: relative;
+  aspect-ratio: 1;
+  background: white;
+  border-radius: 25px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.action-tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.tile-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile-content .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.tile-content .foreground {
+  position: relative;
+  z-index: 2;
+  width: 60%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Logo styling */
+.logo {
+  width: 180px;
+  height: auto;
+}
+
+/* Meer vrienden-knop */
+.more-friends-button img {
+  width: 40px;
+  height: auto;
+}
+
+/* Responsieve weergave */
+@media (max-width: 768px) {
+  .content-layout {
+    flex-direction: column;
+  }
+
+  .action-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .friends-sidebar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .action-tiles {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .friend-card {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .friend-avatar {
+    width: 50px;
+    height: 50px;
+  }
+}

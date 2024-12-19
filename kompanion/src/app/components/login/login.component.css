@@ -1,0 +1,222 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0499ae;
+  padding: 1rem;
+  overflow: auto; /* Zorg dat kleinere schermen kunnen scrollen */
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.auth-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 2rem;
+  width: 90%; /* Responsieve breedte */
+  max-width: 900px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.logo {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-image {
+  width: 150px; /* Kleiner logo voor kleinere schermen */
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.welcome-text {
+  color: #333;
+  font-size: 2.5rem; /* Kleiner voor kleinere schermen */
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.2rem; /* Kleiner voor kleinere schermen */
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  color: #333;
+  font-size: 1rem; /* Responsief kleiner font */
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem; /* Kleiner voor responsieve input */
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  font-size: 1rem; /* Kleiner voor responsieve input */
+  color: #333;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: transparent;
+  border: 1px solid #00a19c;
+  border-radius: 2rem;
+  color: #000000;
+  font-size: 1.2rem; /* Kleiner font */
+  font-weight: 400;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: #00a19c;
+  color: white;
+}
+
+.auth-link-text {
+  margin-top: 1.5rem;
+  color: #666;
+  font-size: 1rem; /* Kleiner font */
+}
+
+.auth-link {
+  color: white;
+  background-color:#0499ae ;
+  text-decoration: none;
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem; /* Padding om ruimte rond de tekst te creëren */
+  border: 2px solid #00a19c; /* Voeg een border toe */
+  border-radius: 5px; /* Maak de randen licht afgerond */
+  transition: all 0.3s ease; /* Zachte overgangseffecten */
+}
+
+.auth-link:hover {
+  text-decoration: none; /* Behoud zonder onderstreping bij hover */
+  background-color: #00a19c; /* Voeg een achtergrondkleur toe bij hover */
+  color: white; /* Maak de tekst wit bij hover */
+}
+
+.error-message {
+  background: #fff5f5;
+  color: #c53030;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1rem; /* Kleiner font */
+  text-align: center;
+  border: 2px solid #fed7d7;
+}
+
+.popup-message {
+  background-color: #fff8e1;
+  color: #ff6f00;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Media Queries voor Responsiviteit */
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 1.5rem; /* Minder padding op kleine schermen */
+  }
+
+  .logo-image {
+    width: 120px; /* Verklein het logo verder op kleine schermen */
+  }
+
+  .welcome-text {
+    font-size: 2rem; /* Kleiner font voor de titel */
+  }
+
+  .subtitle {
+    font-size: 1rem; /* Kleiner font voor de ondertitel */
+    padding: 0 1rem; /* Minder padding */
+  }
+
+  .form-label {
+    font-size: 0.9rem; /* Kleiner font voor labels */
+  }
+
+  .form-input {
+    padding: 0.8rem; /* Kleiner inputveld */
+    font-size: 0.9rem; /* Kleiner font */
+  }
+
+  .auth-button {
+    font-size: 1rem; /* Kleiner font voor de knop */
+    padding: 0.8rem; /* Minder padding */
+  }
+
+  .auth-link-text {
+    font-size: 0.9rem; /* Kleiner font */
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1rem; /* Nog minder padding op zeer kleine schermen */
+    border-radius: 1rem; /* Minder afgeronde hoeken */
+  }
+
+  .logo-image {
+    width: 100px; /* Verklein het logo verder */
+  }
+
+  .welcome-text {
+    font-size: 1.8rem; /* Nog kleiner font voor de titel */
+  }
+
+  .subtitle {
+    font-size: 0.9rem; /* Nog kleiner font voor de ondertitel */
+    padding: 0 0.5rem; /* Minder padding */
+  }
+
+  .form-input {
+    padding: 0.6rem; /* Klein inputveld */
+    font-size: 0.8rem; /* Nog kleiner font */
+  }
+
+  .auth-button {
+    font-size: 0.9rem; /* Nog kleiner font voor de knop */
+    padding: 0.6rem; /* Minder padding */
+  }
+
+  .auth-link-text {
+    font-size: 0.8rem; /* Nog kleiner font */
+  }
+}

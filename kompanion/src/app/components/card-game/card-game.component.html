@@ -1,0 +1,53 @@
+<div class="game-container">
+    <video #remoteVideo autoplay playsinline muted class="background-video"></video>
+  
+    <div class="game-content">
+      <div class="game-status">
+        <div class="status-badge" [class.active]="isPlayerTurn">
+          {{ isPlayerTurn ? 'Jouw beurt' : 'Computer denkt na...' }}
+        </div>
+      </div>
+  
+      <div class="game-board">
+        <!-- CPU's hand -->
+        <div class="opponent-hand">
+          <div *ngFor="let card of cpuHand; let i = index"
+               class="card cpu-card"
+               [style.transform]="getCardTransform(i, cpuHand.length)">
+            <img src="assets/images/cards/back.png" alt="CPU card" />
+          </div>
+        </div>
+  
+        <!-- Play area -->
+        <div class="play-area">
+          <div class="deck-pile" [class.active]="isPlayerTurn" (click)="drawCard()">
+            <img src="assets/images/cards/back.png" alt="Deck" />
+            <span class="deck-count">{{ deck.length }}</span>
+          </div>
+  
+          <div class="played-pile">
+            <img *ngIf="topCard" [src]="topCard.imageUrl" [alt]="topCard.value + ' of ' + topCard.suit" />
+          </div>
+        </div>
+  
+        <!-- Player's hand -->
+        <div class="player-hand">
+          <div *ngFor="let card of playerHand; let i = index"
+               class="card player-card"
+               [class.playable]="canPlayCard(card) && isPlayerTurn"
+               [style.transform]="getCardTransform(i, playerHand.length)"
+               (click)="playCard(card)">
+            <img [src]="card.imageUrl" [alt]="card.value + ' of ' + card.suit" />
+          </div>
+        </div>
+      </div>
+  
+      <div class="game-controls">
+        <button (click)="startNewGame()" class="new-game-button">
+          Nieuw Spel
+        </button>
+      </div>
+    </div>
+  
+    <video #localVideo autoplay playsinline muted class="local-video"></video>
+  </div>
