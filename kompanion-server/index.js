@@ -129,16 +129,20 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("offer", ({ offer, roomId }) => {
-    socket.to(roomId).emit("offer", offer);
+  socket.on('offer', ({ offer, roomId }) => {
+    console.log(`Offer ontvangen voor room: ${roomId}`);
+    socket.to(roomId).emit('offer', { offer });
   });
-
-  socket.on("answer", ({ answer, roomId }) => {
-    socket.to(roomId).emit("answer", answer);
+  
+  socket.on('answer', ({ answer, roomId }) => {
+    console.log(`Answer ontvangen voor room: ${roomId}`);
+    socket.to(roomId).emit('answer', { answer });
   });
+  
 
-  socket.on("iceCandidate", ({ candidate, roomId }) => {
-    socket.to(roomId).emit("iceCandidate", candidate);
+  socket.on('iceCandidate', ({ candidate, roomId }) => {
+    console.log(`ICE candidate ontvangen voor room: ${roomId}`);
+    socket.to(roomId).emit('iceCandidate', candidate);
   });
 
   socket.on("disconnect", () => {

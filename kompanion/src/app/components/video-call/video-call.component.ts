@@ -37,7 +37,7 @@ export class VideoCallComponent implements OnInit, OnDestroy {
   private localStream!: MediaStream;
 
   isWaitingForMatch = true;
-  friendToAdd: Friend | null = null; // Eigenschap voor vriend om toe te voegen
+  friendToAdd: Friend | null = null;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -49,20 +49,20 @@ export class VideoCallComponent implements OnInit, OnDestroy {
   }
 
   private setupSocket(): void {
-    this.socket = io("http://localhost:3000");
-  
-    this.socket.on("matchFound", async (data: { roomId: string; isInitiator: boolean }) => {
-      console.log("Match gevonden. Room ID:", data.roomId);
+    this.socket = io('http://localhost:3000'); // Adjust as needed
+
+    this.socket.on('matchFound', async (data: { roomId: string; isInitiator: boolean }) => {
+      console.log('Match gevonden. Room ID:', data.roomId);
       this.isWaitingForMatch = false;
-  
+
       if (!this.localStream) {
         await this.setupLocalStream();
       }
-  
+
       this.initializePeerConnection(data.roomId, data.isInitiator);
     });
-  
-    this.socket.emit("findMatch"); // Start zoeken naar een match
+
+    this.socket.emit('findMatch'); // Start looking for a match
   }
 
   private async setupLocalStream(): Promise<void> {
@@ -72,70 +72,83 @@ export class VideoCallComponent implements OnInit, OnDestroy {
           video: true,
           audio: true,
         });
-  
+
         if (this.localVideo?.nativeElement) {
           this.localVideo.nativeElement.srcObject = this.localStream;
         }
-        console.log("Local stream opgezet.");
+        console.log('Local stream setup complete.');
       }
     } catch (error) {
-      console.error("Fout bij het openen van camera en microfoon:", error);
+      console.error('Error accessing camera and microphone:', error);
     }
   }
 
   private initializePeerConnection(roomId: string, isInitiator: boolean): void {
     this.peerConnection = new RTCPeerConnection({
-      iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+      iceServers: [
+        { urls: 'stun:stun.l.google.com:19302' },
+        { urls: 'turn:165.22.21.74:3478', username: 'user', credential: 'uiopuiop' },
+      ],
     });
-  
+
     this.localStream.getTracks().forEach((track) => {
       this.peerConnection.addTrack(track, this.localStream);
     });
-  
-    this.peerConnection.ontrack = (event) => {
-      if (this.remoteVideo?.nativeElement) {
-        this.remoteVideo.nativeElement.srcObject = event.streams[0];
-        console.log("Remote stream ontvangen.");
-        // Verberg de wachttekst
-        const waitingMessage = document.querySelector('.waiting-message');
-        if (waitingMessage) {
-          waitingMessage.classList.add('hidden');
-        }
-      }
-    };
-  
+
     this.peerConnection.onicecandidate = (event) => {
       if (event.candidate) {
-        this.socket.emit("iceCandidate", { candidate: event.candidate, roomId });
+        console.log('Sending ICE candidate:', event.candidate);
+        this.socket.emit('iceCandidate', { candidate: event.candidate, roomId });
       }
     };
-  
-    // Als initiator, maak een offer
+
+    this.peerConnection.ontrack = (event) => {
+      console.log('Remote track received:', event.streams);
+      if (this.remoteVideo?.nativeElement) {
+        this.remoteVideo.nativeElement.srcObject = event.streams[0];
+        const waitingMessage = document.querySelector('.waiting-message');
+        if (waitingMessage) waitingMessage.classList.add('hidden');
+      }
+    };
+
+    this.peerConnection.oniceconnectionstatechange = () => {
+      console.log('ICE connection state:', this.peerConnection.iceConnectionState);
+    };
+
     if (isInitiator) {
       this.createAndSendOffer(roomId);
     }
-  
-    // Luister naar signaling events
-    this.socket.on("offer", async (offer: RTCSessionDescriptionInit) => {
-      await this.peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+
+    this.socket.on('offer', async (offer: RTCSessionDescriptionInit) => {
+      console.log('Received SDP Offer:', offer);
+      await this.peerConnection.setRemoteDescription(offer);
       const answer = await this.peerConnection.createAnswer();
       await this.peerConnection.setLocalDescription(answer);
-      this.socket.emit("answer", { answer, roomId });
+      this.socket.emit('answer', { answer, roomId });
     });
-  
-    this.socket.on("answer", async (answer: RTCSessionDescriptionInit) => {
-      await this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+
+    this.socket.on('answer', async (answer: RTCSessionDescriptionInit) => {
+      console.log('Received SDP Answer:', answer);
+      await this.peerConnection.setRemoteDescription(answer);
     });
-  
-    this.socket.on("iceCandidate", async (candidate: RTCIceCandidate) => {
-      await this.peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+
+    this.socket.on('iceCandidate', async (candidate: RTCIceCandidateInit) => {
+      console.log('Received ICE Candidate:', candidate);
+      if (candidate) {
+        await this.peerConnection.addIceCandidate(candidate);
+      }
     });
   }
-  
+
   private async createAndSendOffer(roomId: string): Promise<void> {
-    const offer = await this.peerConnection.createOffer();
-    await this.peerConnection.setLocalDescription(offer);
-    this.socket.emit("offer", { offer, roomId });
+    try {
+      const offer = await this.peerConnection.createOffer();
+      await this.peerConnection.setLocalDescription(offer);
+      console.log('Sending SDP Offer:', offer);
+      this.socket.emit('offer', { offer, roomId });
+    } catch (error) {
+      console.error('Error creating and sending offer:', error);
+    }
   }
 
   toggleCamera(): void {
@@ -151,9 +164,9 @@ export class VideoCallComponent implements OnInit, OnDestroy {
   }
 
   nextPerson(): void {
-    console.log('Volgende persoon zoeken...');
+    console.log('Looking for the next person...');
     this.isWaitingForMatch = true;
-    this.friendToAdd = null; // Reset vriend
+    this.friendToAdd = null;
     this.socket.emit('findMatch');
   }
 
@@ -163,9 +176,9 @@ export class VideoCallComponent implements OnInit, OnDestroy {
       if (!existingFriends.some((f: Friend) => f.name === this.friendToAdd!.name)) {
         existingFriends.push(this.friendToAdd);
         localStorage.setItem('friends', JSON.stringify(existingFriends));
-        alert(`${this.friendToAdd.name} is toegevoegd als vriend!`);
+        alert(`${this.friendToAdd.name} has been added as a friend!`);
       } else {
-        alert(`${this.friendToAdd.name} staat al in je vriendenlijst.`);
+        alert(`${this.friendToAdd.name} is already in your friends list.`);
       }
     }
   }
