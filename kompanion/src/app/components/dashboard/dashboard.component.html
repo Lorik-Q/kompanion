@@ -31,17 +31,15 @@
         <img
           src="assets/images/kompanion_no_text.png"
           alt="Kompanion Logo"
-          class="logo"
         />
         <div class="header-text">
           <h1>Welkom bij KOMPANION!</h1>
           <p class="timestamp">
             {{ currentDate | date : "EEEE d MMMM HH:mm" : "nl" }}
           </p>
-        </div>
-      </div>
-
-      <!-- Actie Tiles -->
+        <img src="assets/images/kompanion_no_text.png" alt="Kompanion Logo" class="logo" />
+        <div class="header-text">
+          <h1>Welkom bij KOMPANION!</h1>
       <div class="action-tiles">
         <!-- Video Call Tile -->
         <button class="action-tile" [routerLink]="['/video-call']">
