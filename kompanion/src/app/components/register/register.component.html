@@ -1,0 +1,54 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="logo">
+      <img
+        src="assets/images/kompanion_no_text.png"
+        alt="Logo"
+        class="logo-image"
+      />
+    </div>
+    <h1 class="welcome-text">Welkom!</h1>
+    <p class="subtitle">
+      Maak een account aan om gebruik te maken van onze diensten
+    </p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name" class="form-label">Naam</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-input"
+          placeholder="Typ hier uw naam"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">E-mailadres</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-input"
+          placeholder="Typ hier uw E-mailadres"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Wachtwoord</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-input"
+          placeholder="Typ hier uw wachtwoord"
+        />
+      </div>
+
+      <button type="submit" class="auth-button">
+        Druk hier om verder te gaan
+      </button>
+    </form>
+  </div>
+</div>

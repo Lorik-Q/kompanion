@@ -1,0 +1,118 @@
+.video-call-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Witte Balk Links */
+.controls-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 25vw; /* Dynamische breedte gebaseerd op viewport */
+  max-width: 160px;
+  min-width: 60px;
+  background-color: white;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2vh; /* Dynamische afstand tussen knoppen */
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 2; /* Zorg dat de controls altijd zichtbaar blijven */
+}
+
+/* Knoppen Styling */
+.control-button {
+  background-color: transparent;
+  border: none;
+  width: 60%; /* Knoppen gebruiken 60% van de balkbreedte */
+  aspect-ratio: 1; /* Vierkante knoppen */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.control-button.add-friend {
+  width: 80%;
+}
+
+.control-button img {
+  width: 180%; /* Dynamische grootte van het icoontje */
+  height: auto;
+}
+
+/* Remote Video Styling */
+.remote-video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Achtergrondlaag */
+  overflow: hidden;
+}
+
+.remote-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Zorg dat de video volledig wordt gevuld */
+  background: black;
+}
+
+/* Lokale Video Rechtsboven */
+.local-video-container {
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  width: 20vw;
+  max-width: 250px;
+  aspect-ratio: 16 / 9;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 3; /* Zorg dat de local video bovenop ligt */
+}
+
+.local-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Wachtbericht Styling */
+.waiting-message {
+  position: absolute;
+  text-align: center;
+  font-size: clamp(1.5rem, 1vw, 2.5rem);
+  line-height: 1.5;
+  color: white;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.waiting-message.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.control-button.toggle-camera.disabled {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 2px solid rgba(255, 0, 0, 0.3);
+}
+
+.control-button.toggle-camera.disabled img {
+  opacity: 0.5;
+}

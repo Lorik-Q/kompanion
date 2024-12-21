@@ -1,0 +1,107 @@
+<div class="dashboard-container">
+  <div class="content-layout">
+    <!-- Vrienden Sidebar -->
+    <div class="friends-sidebar">
+      <h2>Mijn vrienden</h2>
+      <div class="friend-list">
+        <!-- Loop door vrienden -->
+        <div *ngFor="let friend of friends" class="friend-card">
+          <!-- Profielfoto -->
+          <img [src]="friend.photo" [alt]="friend.name" class="friend-avatar" />
+          <!-- Naam vriend -->
+          <span class="friend-name">{{ friend.name }}</span>
+          <!-- Verwijderen-knop -->
+          <button class="delete-button" (click)="openDeleteDialog(friend)">
+            <img src="assets/icons/remove-friend.png" alt="Verwijder vriend" />
+          </button>
+          <!-- Video call-knop -->
+          <button
+            class="video-call-button"
+            [routerLink]="['/video-call', friend.name]"
+          >
+            <img src="assets/images/video.png" alt="Video call" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="header">
+        <img
+          src="assets/images/kompanion_no_text.png"
+          alt="Kompanion Logo"
+          class="logo"
+        />
+        <div class="header-text">
+          <h1>Welkom bij KOMPANION!</h1>
+          <p class="timestamp">
+            {{ currentDate | date : "EEEE d MMMM HH:mm" : "nl" }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Actie Tiles -->
+      <div class="action-tiles">
+        <!-- Video Call Tile -->
+        <button class="action-tile" [routerLink]="['/video-call']">
+          <div class="tile-content">
+            <img
+              class="background"
+              src="assets/images/green-background.png"
+              alt="Video Call"
+            />
+            <img
+              class="foreground"
+              src="assets/icons/video-icon.png"
+              alt="Video Call"
+            />
+          </div>
+        </button>
+
+        <!-- Messages Tile -->
+        <button class="action-tile" [routerLink]="['/dashboard']">
+          <div class="tile-content">
+            <img
+              class="background"
+              src="assets/images/green-background.png"
+              alt="Messages"
+            />
+            <img
+              class="foreground"
+              src="assets/icons/message.png"
+              alt="Messages"
+            />
+          </div>
+        </button>
+
+        <!-- Card Game Tile -->
+        <button class="action-tile" [routerLink]="['/games/cards']">
+          <div class="tile-content">
+            <img
+              class="background"
+              src="assets/images/green-background.png"
+              alt="Card Game"
+            />
+            <img
+              class="foreground"
+              src="assets/icons/cards.png"
+              alt="Card Game"
+            />
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modale Pop-up -->
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <p>Weet je zeker dat je {{ modalFriend?.name }} wilt verwijderen?</p>
+    <button class="confirm-button" (click)="deleteFriend(modalFriend!)">
+      Ja, verwijderen
+    </button>
+    <button class="cancel-button" (click)="closeModal()">Annuleren</button>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="video-call-container">
+  <!-- Witte Balk Links -->
+  <div class="controls-bar">
+    <button class="control-button toggle-camera" (click)="toggleCamera()">
+      <img src="assets/icons/toggle-camera.png" alt="Toggle Camera" />
+    </button>
+    <button class="control-button next-person">
+      <img src="assets/icons/next-person.png" alt="Next Person" />
+    </button>
+    <button
+      class="control-button add-friend"
+      (click)="addFriendFromVideoCall()"
+    >
+      <img src="assets/icons/add-friend.png" alt="Add Friend" />
+    </button>
+    <button class="control-button end-call" [routerLink]="['/dashboard']">
+      <img src="assets/icons/end-call.png" alt="End Call" />
+    </button>
+  </div>
+
+  <!-- Lokale video rechtsboven -->
+  <div class="local-video-container">
+    <video #localVideo autoplay muted playsinline class="local-video"></video>
+  </div>
+
+  <div class="remote-video-container">
+    <video #remoteVideo autoplay playsinline class="remote-video"></video>
+  </div>
+
+  <!-- Berichten en Status -->
+  <div class="waiting-message" [class.hidden]="!isWaitingForMatch">
+    <h1>Aan het connecteren met je gesprekspartner.</h1>
+    <p>Even geduld....</p>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="logo">
+      <img src="assets/images/kompanion_no_text.png" alt="Logo" class="logo-image" />
+    </div>
+    <h1 class="welcome-text">Welkom terug!</h1>
+    <p class="subtitle">Log in om verder te gaan met uw persoonlijke omgeving</p>
+
+    <!-- Pop-up melding -->
+    <div *ngIf="popupMessage" class="popup-message">
+      {{ popupMessage }}
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <div *ngIf="popupMessage" class="popup-message">
+        {{ popupMessage }}
+      </div>
+      <div class="form-group">
+        <label for="email" class="form-label">E-mailadres</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-input"
+          placeholder="Typ hier uw e-mailadres"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Wachtwoord</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-input"
+          placeholder="Typ hier uw wachtwoord"
+        />
+      </div>
+
+      <button type="submit" class="auth-button">Druk hier om verder te gaan</button>
+    </form>
+
+    <div class="auth-link-text">
+      Nog geen account?
+      <a routerLink="/registreren" class="auth-link">Maak er hier één aan</a>
+    </div>
+  </div>
+</div>

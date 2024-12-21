@@ -1,0 +1,204 @@
+.game-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.local-video {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+
+.game-content {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 80vh;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+}
+
+/* Opponent's hand styling */
+.opponent-hand {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.cpu-card {
+  margin-left: -60px; /* Overlap voor CPU kaarten */
+  background-color: white;
+}
+
+.cpu-card:first-child {
+  margin-left: 0;
+}
+
+.cpu-card img {
+  background-color: white;
+}
+
+/* Play area styling */
+.play-area {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  padding: 2rem;
+}
+
+.deck-pile,
+.played-pile {
+  width: 120px;
+  height: 168px; /* Standaard speelkaart verhouding */
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.deck-pile img,
+.played-pile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+
+.deck-count {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: bold;
+}
+
+/* Player's hand styling */
+.player-hand {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.card {
+  width: 120px;
+  height: 168px;
+  position: relative;
+  transition: all 0.3s ease;
+  margin-left: -60px; /* Standaard overlap */
+  background-color: white;
+  border-radius: 10px;
+}
+
+.card:first-child {
+  margin-left: 0;
+}
+
+.card.playable {
+  cursor: pointer;
+}
+
+.card.playable:hover {
+  transform: translateY(-30px);
+  z-index: 10;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+
+/* Status badge styling */
+.status-badge {
+  text-align: center;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  color: white;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.status-badge.active {
+  background: rgba(76, 175, 80, 0.3);
+}
+
+/* Game controls styling */
+.game-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.new-game-button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.new-game-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+/* Hover effecten */
+.deck-pile {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.deck-pile:hover {
+  transform: translateY(-5px);
+}
+
+/* Actieve speler indicator */
+.active-player {
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+}
