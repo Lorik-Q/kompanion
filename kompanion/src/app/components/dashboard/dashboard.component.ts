@@ -61,8 +61,11 @@ export class DashboardComponent implements OnInit {
 
   deleteFriend(friend: Friend) {
     this.friends = this.friends.filter((f) => f !== friend);
+    localStorage.setItem('friends', JSON.stringify(this.friends));
     this.closeModal();
-    console.log(`${friend.name} is verwijderd.`);
+    console.log(
+      `${friend.name} is verwijderd uit de vriendenlijst en localStorage.`
+    );
   }
   confirmDelete(friend: Friend) {
     const confirmDelete = window.confirm(
@@ -84,7 +87,6 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Alleen in browser-omgeving uitvoeren
     if (isPlatformBrowser(this.platformId)) {
       // Update tijd elke seconde
       setInterval(() => {
@@ -96,7 +98,14 @@ export class DashboardComponent implements OnInit {
       // Laad vrienden uit localStorage
       const storedFriends = localStorage.getItem('friends');
       if (storedFriends) {
-        this.friends = JSON.parse(storedFriends);
+        const parsedFriends = JSON.parse(storedFriends);
+        // Controleer en corrigeer ontbrekende avatars
+        this.friends = parsedFriends.map((friend: Friend) => ({
+          ...friend,
+          photo: friend.photo || 'assets/images/kompanion_no_text.png', // Fallback avatar
+        }));
+        // Update localStorage met gecorrigeerde vrienden
+        localStorage.setItem('friends', JSON.stringify(this.friends));
       }
     }
   }

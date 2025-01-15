@@ -17,9 +17,9 @@ import SimplePeer from 'simple-peer-light';
 interface Friend {
   name: string;
   photo: string;
-  age?: number;
-  city?: string;
-  online?: boolean;
+  age: number;
+  city: string;
+  online: boolean;
 }
 
 interface SignalData {
@@ -170,19 +170,35 @@ export class VideoCallComponent implements OnInit, OnDestroy {
   }
 
   addFriendFromVideoCall() {
-    if (this.friendToAdd) {
+    const defaultAvatarPath = 'assets/images/deafult-avatar.png';
+
+    const newFriend: Friend = {
+      name: `Lorik`,
+      photo: defaultAvatarPath,
+      age: 65,
+      city: 'Amsterdam',
+      online: true,
+    };
+
+    try {
       const existingFriends = JSON.parse(
         localStorage.getItem('friends') || '[]'
       );
-      if (
-        !existingFriends.some((f: Friend) => f.name === this.friendToAdd!.name)
-      ) {
-        existingFriends.push(this.friendToAdd);
+
+      if (!existingFriends.some((f: Friend) => f.name === newFriend.name)) {
+        existingFriends.push(newFriend);
         localStorage.setItem('friends', JSON.stringify(existingFriends));
-        alert(`${this.friendToAdd.name} has been added as a friend!`);
+
+        console.log('Friend added:', newFriend);
+        console.log('Avatar path:', defaultAvatarPath);
+
+        alert(`${newFriend.name} is toegevoegd aan je vriendenlijst!`);
       } else {
-        alert(`${this.friendToAdd.name} is already in your friends list.`);
+        alert(`${newFriend.name} staat al in je vriendenlijst.`);
       }
+    } catch (error) {
+      console.error('Error adding friend:', error);
+      alert('Er is een fout opgetreden bij het toevoegen van de vriend.');
     }
   }
 

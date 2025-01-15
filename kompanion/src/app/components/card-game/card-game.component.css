@@ -202,3 +202,42 @@
 .active-player {
   box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
 }
+
+/* Voeg deze nieuwe styles toe */
+.video-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 4;
+}
+
+.control-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.control-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.control-button.toggle-camera.disabled {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 2px solid rgba(255, 0, 0, 0.3);
+}
+
+.control-button.toggle-camera.disabled img {
+  opacity: 0.5;
+}
